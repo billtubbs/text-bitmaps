@@ -51,7 +51,10 @@ def display_text_prop(text, display_size=display_size,
                       char_size=1,
                       fill="chr_np"):
 
-    sub_label = '_s{:d}'.format(char_size)
+    if char_size > 1:
+        sub_label = '_s{:d}'.format(char_size)
+    else:
+        sub_label = ''
 
     # Binary image
     display = Image.new('1', display_size, color=0)
