@@ -7,7 +7,6 @@ such as Papirus e-paper liquid-crystal displays.
 """
 
 from PIL import Image, ImageDraw
-import numpy as np
 
 # For python 2 compatibility:
 try:
