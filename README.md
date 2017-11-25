@@ -47,7 +47,7 @@ text_to_display = "Take this kiss upon the brow!\n" \
                   "Is but a dream within a dream."
 
 img, char_count = bitmaps.display_text_prop(text_to_display)
-img.show(display)
+img.show()
 img.save("eapoe2.bmp")
 
 print("{} of {} characters displayed.".format(char_count, len(text_to_display)))
@@ -64,7 +64,7 @@ There are also double-sized versions of all the bitmaps.
 ```
 text_to_display = [chr(c) for c in range(32, 128)]
 
-img, char_count = bitmaps.display_text_prop(text_to_display, display_size=(200, 96),  char_size=2)
+img, char_count = bitmaps.display_text_prop(text_to_display, display_size=(200, 96), char_size=2)
 img.show()
 img.save("large_font.bmp")
 
