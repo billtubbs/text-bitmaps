@@ -28,8 +28,9 @@ img = bitmaps.get_char_image(65)
 img.show()
 ```
 
-Produces:
-<IMG SRC="ascii/fixed/chr_0x0041.bmp" height="100">
+Produces the following image:
+
+<IMG SRC="ascii/fixed/chr_0x0041.bmp">
 
 
 ```
@@ -52,7 +53,7 @@ img.save("eapoe2.bmp")
 print("{} of {} characters displayed.".format(char_count, len(text_to_display)))
 ```
 
-Produces:
+Produces the following image:
 
 <IMG SRC="eapoe2.bmp" width="400">
 
