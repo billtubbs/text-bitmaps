@@ -24,6 +24,8 @@ The proportional bitmaps allows more characters per line because certain charact
 There are two functions.
 
 ```
+import bitmaps
+
 img = bitmaps.get_char_image(65)
 img.show()
 ```
