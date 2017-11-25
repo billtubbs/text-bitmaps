@@ -53,8 +53,27 @@ img.save("eapoe2.bmp")
 print("{} of {} characters displayed.".format(char_count, len(text_to_display)))
 ```
 
-Produces the following image:
+Produces:
 
 <IMG SRC="eapoe2.bmp" width="400">
 
 251 of 305 characters displayed.
+
+There are also double-sized versions of all the bitmaps.
+
+```
+text_to_display = [chr(c) for c in range(32, 128)]
+
+img, char_count = bitmaps.display_text_prop(text_to_display, display_size=(200, 96),  char_size=2)
+img.show()
+img.save("large_font.bmp")
+
+print("{} of {} characters displayed.".format(char_count, len(text_to_display)))
+```
+
+Produces:
+
+<IMG SRC="large_font.bmp" width="400">
+
+72 of 96 characters displayed.
+
