@@ -79,3 +79,7 @@ Produces:
 
 72 of 96 characters displayed.
 
+
+## Related projects
+
+- [papirus-zero](https://github.com/billtubbs/papirus-zero)
