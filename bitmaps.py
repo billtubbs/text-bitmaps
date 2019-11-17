@@ -20,6 +20,15 @@ tab_setting = 4
 
 def get_char_image(c, char_set='ascii', spacing='fixed',
                    sub_label='', fill="chr_np.bmp"):
+    """Returns bitmap image of character c.
+
+    Args:
+        c (str): Single character (e.g. 'a')
+        char_set (str): Character set to use ('unicode' or 'ascii').
+        sub_label (str): '' or '_s2' for double-size bitmaps.
+        fill (str): Filename of char to use when character not
+            recognized (or file error).
+    """
 
     if isinstance(c, str):
         c = ord(c)
@@ -35,17 +44,34 @@ def get_char_image(c, char_set='ascii', spacing='fixed',
         im = Image.open(filename)
     return im
 
+
 char_height = get_char_image(32).size[1]
 
 
 def display_text_prop(text, display_size=display_size,
-                      char_set='ascii',
-                      x_borders=(1, 1),
-                      y_borders=(1, 1),
-                      char_height=char_height,
-                      spacing='prop',
-                      char_size=1,
+                      char_set='unicode',
+                      x_borders=(1, 1), y_borders=(1, 1),
+                      spacing='prop', char_size=1,
                       fill='chr_np'):
+    """Create image from text.
+
+    Args:
+        text (str): Text to display in image.
+        display_size (tuple): Size of image to create.
+        char_set (str): Character set to use ('unicode' or 'ascii').
+        x_borders (tuple): Size of left and write borders (pixels).
+        y_borders (tuple): Size of top and bottom borders (pixels).
+        spacing (str): Fixed or propoertional char spacing ('fixed'
+            or 'prop').
+        fill (str): Filename of char to use when character not
+            recognized (or file error).
+
+    Returns:
+        display (PIL.Image): Image object.
+        char_count (int): Number of characters that were displayed.
+            This depends on the size of the image and the character
+            spacing.
+    """
 
     if char_size > 1:
         sub_label = '_s{:d}'.format(char_size)
@@ -64,15 +90,16 @@ def display_text_prop(text, display_size=display_size,
     # Newlines are handled
     for char_count, c in enumerate(text):
         if c == chr(10):
-            x, y = (x_borders[0], y + char_height*char_size)
-            if y + char_height*char_size > display_size[1]:
+            # Start newline
+            x, y = (x_borders[0], y + char_height * char_size)
+            if y + char_height * char_size > display_size[1]:
                 break
         else:
             im = get_char_image(c, char_set=char_set, spacing=spacing,
                                 sub_label=sub_label, fill=fill)
             if x + im.size[0] > display_size[0]:
-                x, y = (x_borders[0], y + char_height*char_size)
-                if y + char_height*char_size > display_size[1]:
+                x, y = (x_borders[0], y + char_height * char_size)
+                if y + char_height * char_size > display_size[1]:
                     break
                 if c == " ":
                     continue
