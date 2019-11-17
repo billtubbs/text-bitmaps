@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 """
 Python module to produce bitmap images containing text
 for use with small, low-resolution black-and-white displays
@@ -14,27 +13,23 @@ try:
 except:
     pass
 
-display_size = (200, 96)
-default_chars = "ascii"
-default_width = "fixed"
-x_borders = (1, 1)
-y_borders = (1, 1)
-tab_setting = 4
+display_size = (200, 96)  # Pixel dimensions of Papirus Zero display
 format_string = "{0}/{1}/chr_0x{2:04x}{3}.bmp"
+tab_setting = 4
 
 
-def get_char_image(c, char_set=default_chars, width=default_width,
+def get_char_image(c, char_set='ascii', spacing='fixed',
                    sub_label='', fill="chr_np.bmp"):
 
-    if isinstance(c, (str, unicode)):
+    if isinstance(c, str):
         c = ord(c)
-    filename = format_string.format(char_set, width, c, sub_label)
+    filename = format_string.format(char_set, spacing, c, sub_label)
 
     if fill:
         try:
             im = Image.open(filename)
         except IOError:
-            im = Image.open("{0}/{1}/{2}{3}.bmp".format(char_set, width,
+            im = Image.open("{0}/{1}/{2}{3}.bmp".format(char_set, spacing,
                                                  fill, sub_label))
     else:
         im = Image.open(filename)
@@ -42,13 +37,15 @@ def get_char_image(c, char_set=default_chars, width=default_width,
 
 char_height = get_char_image(32).size[1]
 
+
 def display_text_prop(text, display_size=display_size,
-                      char_set=default_chars,
-                      x_borders=x_borders,
-                      y_borders=y_borders,
+                      char_set='ascii',
+                      x_borders=(1, 1),
+                      y_borders=(1, 1),
                       char_height=char_height,
+                      spacing='prop',
                       char_size=1,
-                      fill="chr_np"):
+                      fill='chr_np'):
 
     if char_size > 1:
         sub_label = '_s{:d}'.format(char_size)
@@ -71,7 +68,7 @@ def display_text_prop(text, display_size=display_size,
             if y + char_height*char_size > display_size[1]:
                 break
         else:
-            im = get_char_image(c, char_set=char_set, width="prop",
+            im = get_char_image(c, char_set=char_set, spacing=spacing,
                                 sub_label=sub_label, fill=fill)
             if x + im.size[0] > display_size[0]:
                 x, y = (x_borders[0], y + char_height*char_size)
